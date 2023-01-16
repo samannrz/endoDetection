@@ -54,7 +54,8 @@ def findClass(key, objects):
             return obj['classTitle']
 
 def bbox2yolo(bbox,size):
-    return [(bbox[0]+bbox[1])/2 , (bbox[2]+bbox[3])/2, (bbox[1]-bbox[0])/size['width'], (bbox[3]-bbox[2])/size['height']]
+
+    return [(bbox[0][0]+bbox[0][1])/2 , (bbox[1][0]+bbox[1][1])/2, (bbox[0][1]-bbox[0][0])/size['width'], (bbox[1][1]-bbox[1][0])/size['height']]
 
 
 createDIR(savePath_img)

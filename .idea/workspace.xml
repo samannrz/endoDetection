@@ -5,17 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00dad1df-89d4-481b-b923-1f1ae8503b63" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IncisionComparison2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LesionDatasetCreationYolov5.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OverlayMask.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/arial.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model2torch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/endoDetection.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/endoDetection.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IncisionDataFolderCreation.py" beforeDir="false" afterPath="$PROJECT_DIR$/IncisionDataFolderCreation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IncisionWSComparisons.py" beforeDir="false" afterPath="$PROJECT_DIR$/IncisionWSComparisons.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LesionDatasetCreation.py" beforeDir="false" afterPath="$PROJECT_DIR$/LesionDatasetCreation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LesionDatasetCreationYolov5.py" beforeDir="false" afterPath="$PROJECT_DIR$/LesionDatasetCreationYolov5.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +38,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/media/saman/data/PycharmProjects/SuperviselyProject",
+    "last_opened_file_path": "/Users/saman/PycharmProjects/endoDetection",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
@@ -91,8 +84,7 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="$PROJECT_DIR$/../../myenvs/endoenv/bin/python" />
-      <option name="SDK_NAME" value="Python 3.9 (endoenv)" />
+      <option name="SDK_HOME" value="$USER_HOME$/myenvs/endoenv/bin/python" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ImgOut" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />

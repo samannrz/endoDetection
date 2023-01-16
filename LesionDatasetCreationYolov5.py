@@ -54,9 +54,7 @@ def findClass(key, objects):
             return obj['classTitle']
 
 def bbox2yolo(bbox,size):
-    xcenter = (bbox[0]+bbox[1])/2
-
-    return [(bbox[0]+bbox[1])/2 , (bbox[2]+bbox[3])/2, (bbox[1]-bbox[0])/
+    return [(bbox[0]+bbox[1])/2 , (bbox[2]+bbox[3])/2, (bbox[1]-bbox[0])/size['width'], (bbox[3]-bbox[2])/size['height']]
 
 
 createDIR(savePath_img)
@@ -122,7 +120,7 @@ for project in projects: # for each project
                     # find the class of the polygon
                     classobj = findClass(fig['objectKey'], annotation['objects'])
                     box = bbox2yolo(bbox,img_size)
-                    txt = lesiondic[classobj] + ' ' +
+                    txtline = [(lesiondic[classobj])]+box
 
 
                 # Save image and annotation files for the frame
@@ -131,7 +129,7 @@ for project in projects: # for each project
                 # if the file is already saved, skip
                 if os.path.exists(savePath_img + vidname + "_%d.jpg" % fr['index']):
                     continue
-                if len(bbox) == 0:
+                if len(box) == 0:
                     imagecounterBAD +=1
                     continue
                 try:
@@ -139,6 +137,7 @@ for project in projects: # for each project
                             extractFrame(vidpath, fr['index']))  # save frame as JPEG file
                     # save the label file
                     with open(savePath_lbl + vidname + "_%d.txt" % fr['index'], 'w') as f:
+                        f.write(' '.join(map(str, txtline)))
 
                 except cv2.error as e:
                     notsavedlist.append(savePath_img + vidname + ', from project:'+project + ', from dataset:' + ds + ', frame number:'+str(fr['index']))

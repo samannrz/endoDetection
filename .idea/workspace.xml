@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00dad1df-89d4-481b-b923-1f1ae8503b63" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/endoDetection.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/endoDetection.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LesionDatasetCreationYolov5.py" beforeDir="false" afterPath="$PROJECT_DIR$/LesionDatasetCreationYolov5.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +53,7 @@
       <recent name="$PROJECT_DIR$/SuperviselyData" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="endoDetection" />
       <option name="INTERPRETER_OPTIONS" value="" />

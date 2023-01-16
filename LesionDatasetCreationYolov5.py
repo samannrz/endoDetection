@@ -8,9 +8,9 @@ import pandas as pd
 # import pygsheets
 
 
-dataPath = '/media/saman/data/Datasets/FEMaLe/WP6/SuperviselyData'
-savePath_img = 'LesionDataset/images'
-savePath_lbl = 'LesionDataset/labels'
+dataPath = '/media/saman/data/Datasets/FEMaLe/Lesion Classification'
+savePath_img = 'LesionDataset/images/'
+savePath_lbl = 'LesionDataset/labels/'
 
 
 def write_to_gsheet(service_file_path, spreadsheet_id, sheet_name, data_df):
@@ -61,7 +61,6 @@ def bbox2yolo(bbox,size):
 createDIR(savePath_img)
 createDIR(savePath_lbl)
 
-projects = os.listdir (dataPath)
 if os.path.exists('LogWP6Creation.txt'):
     # The file exists, so delete it
     os.remove('LogWP6Creation.txt')
@@ -80,7 +79,8 @@ lesiondic = {
         'Ovarian.Endometrioma[B]': 9
     }
 
-
+projects = os.listdir(dataPath)
+print(dataPath)
 for project in projects: # for each project
     print('\nProcessing ' + project + ':')
     if not os.path.isdir(dataPath + '/' +project) :

@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00dad1df-89d4-481b-b923-1f1ae8503b63" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/endoDetection.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/endoDetection.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LesionDatasetCreationYolov5.py" beforeDir="false" afterPath="$PROJECT_DIR$/LesionDatasetCreationYolov5.py" afterDir="false" />
     </list>
@@ -24,19 +22,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN"
-  }
-}]]></component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="66600d35-d65f-4d49-ada1-a604221a4124" />
-        <option name="url" value="https://github.com/samannrz/endoDetection.git" />
-      </UrlAndAccount>
-    </option>
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -69,7 +55,7 @@
       <recent name="$PROJECT_DIR$/SuperviselyData" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="endoDetection" />
       <option name="INTERPRETER_OPTIONS" value="" />

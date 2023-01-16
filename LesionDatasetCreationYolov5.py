@@ -138,7 +138,7 @@ for project in projects: # for each project
                             extractFrame(vidpath, fr['index']))  # save frame as JPEG file
                     # save the label file
                     with open(savePath_lbl + vidname + "_%d.txt" % fr['index'], 'a') as f:
-                        f.write('\n'.join([' '.join(i) for txt in txtline]))
+                        f.write('\n'.join([' '.join(txt) for txt in txtline]))
 
                 except cv2.error as e:
                     notsavedlist.append(savePath_img + vidname + ', from project:'+project + ', from dataset:' + ds + ', frame number:'+str(fr['index']))

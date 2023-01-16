@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 import math
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
@@ -9,7 +9,7 @@ import os
 import pandas as pd
 import pygsheets
 import datetime
-
+import time
 common_path = 'Dataset'
 # maskHarddir = 'maskHard'
 # maskSecudir = 'maskSecurity'
@@ -92,13 +92,11 @@ def initializeMasks(size):
 
 images = os.listdir(common_path + '/image')
 lenimg = len(images)
-# lenimg=2
+# lenimg=4
 print('There are %d images' %lenimg)
-batch_size =6
+batch_size = 4
+space_height = 120
 
-fig, ax = plt.subplots(batch_size, 4)
-
-# a=0
 
 nameList = []
 frameList = []
@@ -106,19 +104,11 @@ HFstat = []
 SFstat = []
 HGstat = []
 SGstat = []
-
-for  j in range(math.ceil(lenimg/batch_size)):
+for j in range(math.ceil(lenimg/batch_size)):
     counter =1
-    if j > math.ceil(lenimg/batch_size)-1:
-        fig1=make_subplots(lenimg%batch_size, 3,
-                          horizontal_spacing = 0.00,vertical_spacing = 0.01)
-        fig2 = make_subplots(lenimg % batch_size, 3,
-                             horizontal_spacing=0.00, vertical_spacing=0.01)
-    else:
-        fig1=make_subplots(batch_size, 3,
-                          horizontal_spacing = 0.00,vertical_spacing = 0.01)
-        fig2 = make_subplots(batch_size, 3,
-                             horizontal_spacing=0.00, vertical_spacing=0.01)
+    batchstart = True
+    hh = 0
+
     for i in range(j*batch_size,(j+1)*batch_size):
         if i>lenimg-1:
             break
@@ -176,44 +166,56 @@ for  j in range(math.ceil(lenimg/batch_size)):
         except ZeroDivisionError:
             S2N = 0
             S1N = 0
-        if plot_ann > 0:
-            image_overlayed_ref = overlayMask(image_orig, maskH_N, maskS_N)
-            image_overlayed_ann1 = overlayMask(image_orig, maskH_G, maskS_G)
-            image_overlayed_ann2 = overlayMask(image_orig, maskH_F, maskS_F)
-            if plot_ann ==1:
-                image_overlayed_ann = image_overlayed_ann1
-                Hscore = H1N
-                Sscore = S1N
-            if plot_ann == 2:
-                image_overlayed_ann = image_overlayed_ann2
-                Hscore = H2N
-                Sscore = S2N
 
-            fig1.add_trace(go.Image(z=image_orig), counter, 1)
-            fig1.add_trace(go.Image(z=image_overlayed_ref),counter,  2)
-            fig1.add_trace(go.Image(z=image_overlayed_ann), counter, 3)
-            fig1.update_layout(height=1080, width=1080)
-            fig1.update_xaxes(visible=False, row=counter, col=1)
-            fig1.update_xaxes(visible=False, row=counter, col=2)
-            fig1.update_xaxes(visible=False, row=counter, col=3)
-            # fig1.update_yaxes(visible=False, row=counter, col=1)
-            fig1.update_yaxes(visible=False, row=counter, col=2)
-            fig1.update_yaxes(visible=False, row=counter, col=3)
-            fig1.update_yaxes(title='<span style="font-size: 10px;">'+'H.sc: ' + str(Hscore)+'<br>'+'Sec.sc: ' + str(Sscore)+'</span>', row=counter, col=1)
 
-            counter+=1
+        image_overlayed_ref = overlayMask(image_orig, maskH_N, maskS_N)
+        image_overlayed_ann1 = overlayMask(image_orig, maskH_G, maskS_G)
+        image_overlayed_ann2 = overlayMask(image_orig, maskH_F, maskS_F)
 
-            imagename = images[i][:-4]
-            namevid, _, frnumber = imagename.rpartition('_')
-            nameList.append(namevid[:-4])
-            frameList.append(frnumber)
-            HFstat.append(H2N)
-            SFstat.append(S2N)
-            HGstat.append(H1N)
-            SGstat.append(S1N)
+        if batchstart:
+            batchstart = False
+            if j > math.ceil(lenimg / batch_size) - 1:
+                print(lenimg % batch_size)
+                im3 = Image.new("RGB", (
+                    4 * image_orig.width,
+                    batch_size * image_overlayed_ref.height + space_height * (lenimg % batch_size + 1)),
+                                (255, 255, 255))
+            else:
+                im3 = Image.new("RGB", (
+                    4 * image_orig.width, batch_size * image_overlayed_ref.height + space_height * (batch_size + 1)),
+                                (255, 255, 255))
 
-    # fig.show()
-    fig1.write_html('ImgOut/'+'Ann'+str(plot_ann)+'_'+ str(j)+'.html')
+        # Paste the images onto the white background
+        im3.paste(image_orig, (0, hh+space_height))
+        im3.paste(image_overlayed_ref, (image_orig.width, hh+space_height))
+        im3.paste(image_overlayed_ann1, (2*image_overlayed_ref.width, hh+space_height))
+        im3.paste(image_overlayed_ann2, (3*image_overlayed_ref.width, hh+space_height))
+        draw = ImageDraw.Draw(im3)
+        font = ImageFont.truetype("arial.ttf", 50)
+        # Draw the text on the image
+        draw.text((5/2*image_overlayed_ann1.width, hh), 'Hard score: '+str(H1N), fill=(0, 0, 0), font=font)
+        draw.text((5/2 * image_overlayed_ann1.width, hh+.5*space_height), 'Sec. score: '+str(S1N), fill=(0, 0, 0), font=font)
+        draw.text((7/2 * image_overlayed_ann2.width, hh), 'Hard score: '+str(H2N), fill=(0, 0, 0), font=font)
+        draw.text((7/2 * image_overlayed_ann2.width, hh+.5*space_height), 'Sec. score: '+str(S2N), fill=(0, 0, 0), font=font)
+
+        hh = hh+ image_orig.height+space_height
+
+        # im3.show()
+        counter+=1
+
+        imagename = images[i][:-4]
+        namevid, _, frnumber = imagename.rpartition('_')
+        nameList.append(namevid[:-4])
+        frameList.append(frnumber)
+        HFstat.append(H2N)
+        SFstat.append(S2N)
+        HGstat.append(H1N)
+        SGstat.append(S1N)
+    # time.sleep(2)
+    # Save the combined image
+    im3.save("ImgOut/Batch2-Comparison" + str(j+1) + ".jpg")
+    # im3.close()
+
 
 data_df = pd.DataFrame(
     {'Vid. Name': nameList, '# frame': frameList, 'Filippo Hard Score': HFstat, 'Filippo Security Score': SFstat, 'Giuseppe Hard Score': HGstat, 'Giuseppe Security Score': SGstat})

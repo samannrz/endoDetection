@@ -63,7 +63,7 @@ createDIR(maskHarddir)
 createDIR(maskSecudir)
 projects =os.listdir (common_path)
 for project in projects: # for each project
-    if not os.path.isdir(common_path + '/' +project) :
+    if not os.path.isdir(common_path + '/' +project) or  project == 'Endometriosis_WS1':
         continue
     datasets = os.listdir(common_path + '/' +project)
     for ds in datasets:

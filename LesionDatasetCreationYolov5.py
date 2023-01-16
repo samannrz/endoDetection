@@ -9,7 +9,9 @@ import pandas as pd
 
 
 dataPath = '/media/saman/data/Datasets/FEMaLe/WP6/SuperviselyData'
-savePath = 'LesionDataset/'
+savePath_img = 'LesionDataset/images'
+savePath_lbl = 'LesionDataset/labels'
+
 
 def write_to_gsheet(service_file_path, spreadsheet_id, sheet_name, data_df):
     """
@@ -51,12 +53,33 @@ def findClass(key, objects):
         if key == obj['key']:
             return obj['classTitle']
 
+def bbox2yolo(bbox,size):
+    xcenter = (bbox[0]+bbox[1])/2
 
-createDIR(savePath)
-projects =os.listdir (dataPath)
+    return [(bbox[0]+bbox[1])/2 , (bbox[2]+bbox[3])/2, (bbox[1]-bbox[0])/
+
+
+createDIR(savePath_img)
+createDIR(savePath_lbl)
+
+projects = os.listdir (dataPath)
 if os.path.exists('LogWP6Creation.txt'):
     # The file exists, so delete it
     os.remove('LogWP6Creation.txt')
+
+
+lesiondic = {
+        'Adhesions.Dense': 0,
+        'Adhesions.Filmy': 1,
+        'Superficial.White': 2,
+        'Superficial.Black': 3,
+        'Superficial.Red': 4,
+        'Superficial.Subtle': 5,
+        'Ovarian.Endometrioma': 6,
+        'Ovarian.Chocolate Fluid': 7,
+        'Deep Endometriosis': 8,
+        'Ovarian.Endometrioma[B]': 9
+    }
 
 
 for project in projects: # for each project
@@ -80,42 +103,46 @@ for project in projects: # for each project
             jsfile = open(annsPath+'/'+js)
             annotation = json.load(jsfile)
             frames = (annotation['frames']) # frame is the annotation info (type: list of dict) on that frame
+            img_size = annotation['size']
+
             if len(frames) <1 :  # if there is no annotation on the video
                 continue # go to the next jsonfile (and so next video)
 
             for fr in frames:
 
-                new_dict = {'bb': [], 'label': []}
                 # Create an image with a white background
                 figures = fr['figures']
                 for fig in figures:
                     if fig['geometryType'] != 'rectangle':
-                        continue # go to next object in the frame if it is not a rectangle
+                        continue # go to next figure in the frame if it is not a rectangle
                     bboxes = fig['geometry']['points']['exterior']
-                    bbox = [b for b in bboxes]
-                    #find the class of the polygon
-                    classobj = findClass(fig['objectKey'], annotation['objects'])
 
-                    #make the annotations for the frame
-                    new_dict['bb'].append(bbox)
-                    new_dict['label'].append(classobj)
+                    # bbox is as [[xmin,xmax],[ymin,ymax]]
+                    bbox = [b for b in bboxes]
+                    # find the class of the polygon
+                    classobj = findClass(fig['objectKey'], annotation['objects'])
+                    box = bbox2yolo(bbox,img_size)
+                    txt = lesiondic[classobj] + ' ' +
+
 
                 # Save image and annotation files for the frame
                 vidpath = find(js[:-5], vidsPath)  # find the video with the associated json file
                 _, _, vidname = vidpath.rpartition('/')
                 # if the file is already saved, skip
-                if os.path.exists(savePath + vidname + "_%d.jpg" % fr['index']):
+                if os.path.exists(savePath_img + vidname + "_%d.jpg" % fr['index']):
                     continue
-                if len(new_dict['bb']) == 0:
+                if len(bbox) == 0:
+                    imagecounterBAD +=1
                     continue
                 try:
-                    cv2.imwrite(savePath + vidname + "_%d.jpg" % fr['index'],
+                    cv2.imwrite(savePath_img + vidname + "_%d.jpg" % fr['index'],
                             extractFrame(vidpath, fr['index']))  # save frame as JPEG file
-                    with open(savePath + vidname + "_%d.json" % fr['index'], 'w') as f:
-                        json.dump(new_dict, f) # save tha bb annotation
+                    # save the label file
+                    with open(savePath_lbl + vidname + "_%d.txt" % fr['index'], 'w') as f:
+
                 except cv2.error as e:
-                    notsavedlist.append(savePath + vidname + ', from project:'+project + ', from dataset:' + ds + ', frame number:'+str(fr['index']))
-                    print('This file is not saved ' + savePath + vidname + '_' + str(fr['index']) )
+                    notsavedlist.append(savePath_img + vidname + ', from project:'+project + ', from dataset:' + ds + ', frame number:'+str(fr['index']))
+                    print('This file is not saved: ' + vidname + '_' + str(fr['index']) )
                     imagecounterBAD += 1
 
                 imagecounter += 1
@@ -126,21 +153,11 @@ for project in projects: # for each project
             f.write('Project {} '.format(project)+'\n')
             f.write('Dataset {} '.format(ds)+'\n')
             f.write('{} images and annotations are processed to be written to '.format(imagecounter))
-            f.write(savePath + '\n')
+            f.write(savePath_img +' and ' +savePath_lbl+ '\n')
             f.write('{} images and annotations are NOT written '.format(imagecounterBAD)+'\n')
             f.write('The images are processed from ' + dataPath+'\n')
             f.write('The followings are not saved' + '\n')
             for i in range(len(notsavedlist)):
                 f.write(notsavedlist[i])
             f.write('\n\n')
-
-
-
-
-
-
-
-
-
-
 

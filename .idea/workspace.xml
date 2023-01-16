@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00dad1df-89d4-481b-b923-1f1ae8503b63" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/endoDetection.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/endoDetection.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LesionDatasetCreationYolov5.py" beforeDir="false" afterPath="$PROJECT_DIR$/LesionDatasetCreationYolov5.py" afterDir="false" />
-    </list>
+    <list default="true" id="00dad1df-89d4-481b-b923-1f1ae8503b63" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,6 +33,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_opened_file_path": "/Users/saman/PycharmProjects/endoDetection",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
@@ -109,7 +105,19 @@
       <option name="presentableId" value="Default" />
       <updated>1667831065795</updated>
     </task>
+    <task id="LOCAL-00001" summary="Yolodataset creation added">
+      <created>1673874604921</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1673874604921</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Yolodataset creation added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Yolodataset creation added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

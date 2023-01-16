@@ -9,8 +9,8 @@ import pandas as pd
 
 
 dataPath = '/media/saman/data/Datasets/FEMaLe/Lesion Classification'
-savePath_img = 'LesionDataset/images'
-savePath_lbl = 'LesionDataset/labels'
+savePath_img = 'LesionDataset/images/'
+savePath_lbl = 'LesionDataset/labels/'
 
 
 def write_to_gsheet(service_file_path, spreadsheet_id, sheet_name, data_df):

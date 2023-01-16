@@ -55,7 +55,7 @@ def findClass(key, objects):
 
 def bbox2yolo(bbox,size):
 
-    return [(bbox[0][0]+bbox[0][1])/2 , (bbox[1][0]+bbox[1][1])/2, (bbox[0][1]-bbox[0][0])/size['width'], (bbox[1][1]-bbox[1][0])/size['height']]
+    return [(bbox[0][0]+bbox[1][0])/2*size['width'] , (bbox[0][1]+bbox[1][1])/2*size['height'], (bbox[1][0]-bbox[0][0])/size['width'], (bbox[1][1]-bbox[0][1])/size['height']]
 
 
 createDIR(savePath_img)
@@ -137,8 +137,8 @@ for project in projects: # for each project
                     cv2.imwrite(savePath_img + vidname + "_%d.jpg" % fr['index'],
                             extractFrame(vidpath, fr['index']))  # save frame as JPEG file
                     # save the label file
-                    with open(savePath_lbl + vidname + "_%d.txt" % fr['index'], 'w') as f:
-                        f.write(' '.join(map(str, txtline)))
+                    with open(savePath_lbl + vidname + "_%d.txt" % fr['index'], 'a') as f:
+                        f.write(*txtline)
 
                 except cv2.error as e:
                     notsavedlist.append(savePath_img + vidname + ', from project:'+project + ', from dataset:' + ds + ', frame number:'+str(fr['index']))

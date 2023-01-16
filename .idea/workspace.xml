@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00dad1df-89d4-481b-b923-1f1ae8503b63" name="Changes" comment="" />
+    <list default="true" id="00dad1df-89d4-481b-b923-1f1ae8503b63" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LesionDatasetCreationYolov5.py" beforeDir="false" afterPath="$PROJECT_DIR$/LesionDatasetCreationYolov5.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -112,12 +115,27 @@
       <option name="project" value="LOCAL" />
       <updated>1673874604921</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Yolodataset creation added">
+      <created>1673875031490</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1673875031490</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Yolodataset bbox checked">
+      <created>1673875478355</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1673875478355</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Yolodataset creation added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Yolodataset creation added" />
+    <MESSAGE value="Yolodataset bbox checked" />
+    <option name="LAST_COMMIT_MESSAGE" value="Yolodataset bbox checked" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -54,8 +54,11 @@ def findClass(key, objects):
             return obj['classTitle']
 
 def bbox2yolo(bbox,size):
-
-    return [(bbox[0][0]+bbox[1][0])/2*size['width'] , (bbox[0][1]+bbox[1][1])/2*size['height'], (bbox[1][0]-bbox[0][0])/size['width'], (bbox[1][1]-bbox[0][1])/size['height']]
+    xcenter = (bbox[0][0]+bbox[1][0])/(2*size['width'])
+    ycenter = (bbox[0][1] + bbox[1][1]) / (2 * size['height'])
+    figwidth = (bbox[1][0]-bbox[0][0])/(size['width'])
+    figheight = (bbox[1][1]-bbox[0][1])/(size['height'])
+    return xcenter ,ycenter, figwidth, figheight
 
 
 createDIR(savePath_img)
@@ -122,7 +125,7 @@ for project in projects: # for each project
                     classobj = findClass(fig['objectKey'], annotation['objects'])
                     box = bbox2yolo(bbox,img_size)
                     txtline = [(lesiondic[classobj])]+box
-
+                    print(txtline)
 
                 # Save image and annotation files for the frame
                 vidpath = find(js[:-5], vidsPath)  # find the video with the associated json file

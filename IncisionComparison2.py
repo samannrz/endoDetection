@@ -94,7 +94,7 @@ images = os.listdir(common_path + '/image')
 lenimg = len(images)
 # lenimg=4
 print('There are %d images' %lenimg)
-batch_size = 4
+batch_size = 6
 space_height = 120
 
 
@@ -200,7 +200,6 @@ for j in range(math.ceil(lenimg/batch_size)):
 
         hh = hh+ image_orig.height+space_height
 
-        # im3.show()
         counter+=1
 
         imagename = images[i][:-4]
@@ -211,9 +210,16 @@ for j in range(math.ceil(lenimg/batch_size)):
         SFstat.append(S2N)
         HGstat.append(H1N)
         SGstat.append(S1N)
+        # print(images[i])
+        # if images[i] == '2022-03-17_043549_VID001_Trim_2.mp4_967.jpg':
+        #     print('HI')
+        #     im3.show()
+
     # time.sleep(2)
     # Save the combined image
     im3.save("ImgOut/Batch2-Comparison" + str(j+1) + ".jpg")
+
+
     # im3.close()
 
 

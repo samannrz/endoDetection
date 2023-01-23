@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw
 import pandas as pd
 import pygsheets
 
-Name = 'Nicolas'
+Name = 'Giuseppe'
 common_path = 'SuperviselyData'+Name
 maskHarddir = 'maskHard'+Name[0]
 maskSecudir = 'maskSecurity'+Name[0]
